@@ -74,4 +74,15 @@ class User extends Authenticatable
             'role' => 'required'
         ];
     }
+
+    public function esCliente()
+    {
+        return $this->rol === 'cliente';
+    }
+
+    public function esTaller()
+    {
+        return $this->rol === 'taller';
+    }
+
 }
