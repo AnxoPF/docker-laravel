@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -45,4 +46,21 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+    * Comprueba si tiene rol administrador
+    * 
+    * @return boolean
+    */
+    public function isAdmin() : boolean
+    {
+        return $this->role === 'admin';
+    }
+    public static function roles() : array
+        {
+            return [
+                'user' => 'Usuario',
+                'admin' => 'Administrador',
+            ];
+        }
 }
