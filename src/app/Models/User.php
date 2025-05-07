@@ -9,14 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -47,21 +41,11 @@ class User extends Authenticatable
         ];
     }
 
-    /**
-    * Comprueba si tiene rol administrador
-    * 
-    * @return boolean
-    */
-    public function isAdmin() : boolean
-    {
-        return $this->role === 'admin';
-    }
-
     public static function roles() : array
     {
         return [
-            'user' => 'Usuario',
-            'admin' => 'Administrador',
+            'cliente' => 'Cliente',
+            'taller' => 'Taller',
         ];
     }
 
@@ -75,14 +59,19 @@ class User extends Authenticatable
         ];
     }
 
-    public function esCliente()
+    public function isCliente()
     {
-        return $this->rol === 'cliente';
+        return $this->role === 'cliente';
     }
 
-    public function esTaller()
+    public function isTaller()
     {
-        return $this->rol === 'taller';
+        return $this->role === 'taller';
+    }
+
+    public function citas()
+    {
+        return $this->hasMany(Cita::class,'user_id');
     }
 
 }

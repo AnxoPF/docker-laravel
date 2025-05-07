@@ -11,7 +11,6 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::view('/dashboard', 'dashboard')->name('dashboard');
-    Route::view('/', 'dashboard');
 
     Route::get('/admin', function () {
         return view('admin');
@@ -21,7 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('/users', UserController::class)->middleware(AdminMiddleware::class);
+    Route::middleware('role:cliente')->prefix('cliente')->name('cliente.')->group(function () {
+        Route::resource('citas', App\Http\Controllers\Cliente\CitaController::class)->only(['index', 'create', 'store', 'show']);
+    });
+
+    Route::middleware('role:taller')->prefix('taller')->name('taller.')->group(function () {
+        Route::resource('citas', App\Http\Controllers\Taller\CitaController::class);
+    });
 });
 
 require __DIR__.'/auth.php';
