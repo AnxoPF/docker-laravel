@@ -24,16 +24,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('/users', UserController::class)->middleware(TallerMiddleware::class);
+    Route::get('/citas/{id}/ver', [CitaController::class, 'show'])->name('citas.show');
 });
 
 Route::middleware(['auth', ClienteMiddleware::class])->group(function () {
     Route::get('/nueva-cita', [CitaController::class, 'create'])->name('citas.create');
     Route::post('/citas', [CitaController::class, 'store'])->name('citas.store');
-    Route::get('/citas/{id}/ver', [CitaController::class, 'show'])->name('citas.show');
 });
 
 Route::middleware(['auth', TallerMiddleware::class])->group(function () {
-    Route::get('/citas/{id}/ver', [CitaController::class, 'show'])->name('citas.show');
     Route::get('/citas/{id}', [CitaController::class, 'edit'])->name('citas.modificar-cita');
     Route::put('/citas/{id}', [CitaController::class, 'update'])->name('citas.update');
     Route::delete('/citas/{id}', [CitaController::class, 'destroy'])->name('citas.eliminar-cita');
