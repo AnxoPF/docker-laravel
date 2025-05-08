@@ -17,12 +17,11 @@ class CitaController extends Controller
 
         if ($user->isTaller()) {
             $citas = Cita::with('cliente')->get();
+            return view('taller.index', compact('citas'));
         } else {
             $citas = Cita::with('cliente')->where('cliente_id', $user->id)->get();
+            return view('cliente.index', compact('citas'));
         }
-
-        return view('citas.index', compact('citas'));
-    }
     }
 
     /**
@@ -30,7 +29,13 @@ class CitaController extends Controller
      */
     public function create()
     {
-        return view('citas.create');
+        $user = Auth::user();
+
+        if ($user->isTaller()) {
+            return view('taller.create');
+        } else {
+            return view('cliente.create');
+        }
     }
 
     /**
@@ -65,13 +70,19 @@ class CitaController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $cita = Cita::findOrFail($id);
+        return view('cliente.show', compact('cita'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
         $cita = Cita::findOrFail($id);
-        return view('citas.edit', compact('cita'));
+        return view('taller.edit', compact('cita'));
     }
 
     /**
