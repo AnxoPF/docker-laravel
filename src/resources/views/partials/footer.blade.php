@@ -1,3 +1,3 @@
 <footer>
-    <p>© {{ date('Y') }} Mi Aplicación</p>
+    <p>© {{ date('Y') }} Taller</p>
 </footer>

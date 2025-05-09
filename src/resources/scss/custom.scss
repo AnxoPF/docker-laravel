@@ -1,11 +1,11 @@
-$primary: #004085 !default; // Permite sobreescribir variables si ya están definidas
-$secondary: #6c757d !default;
-$success: #28a745 !default;
-$info: #17a2b8 !default;
-$warning: #ffc107 !default;
-$danger: #dc3545 !default;
-$light: #f8f9fa !default;
-$dark: #343a40 !default;
+$primary: #53f14e !default; // Permite sobreescribir variables si ya están definidas
+$secondary: #9bc4e7 !default;
+$success: #1ab63e !default;
+$info: #00c2b2 !default;
+$warning: #ffec46 !default;
+$light: #f6fffc !default;
+$dark: #3e4347 !default;
+$danger: rgb(216, 25, 0) !default; 
 
 // Usa Bootstrap con @use
 @use "bootstrap" with (
