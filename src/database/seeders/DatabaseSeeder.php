@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
             'matricula' => '8142 NPL',
             'fecha' => now()->addDays(14)->format('Y:m:d'), 
             'hora' => now()->addDays(14)->format('H:i:s'),
-            'duracion' => '03:00:00',
+            'duracion' => '3',
         ]);
 
         Cita::create([
