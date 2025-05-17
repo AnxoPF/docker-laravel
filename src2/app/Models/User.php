@@ -21,7 +21,36 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    /**
+     * Comprueba si tiene rol administrador
+     * 
+     * @return boolean
+     */
+    public function isAdmin() : boolean
+    {
+        return $this->role === 'admin';
+    }
+
+    public static function roles() : array
+    {
+        return [
+            'user' => 'Usuario',
+            'admin' => 'Administrador',
+        ];
+    }
+
+    public static function rules($userId = null)
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $userId,
+            'password' => 'required|min:8',
+            'role' => 'required'
+        ];
+    }
 
     /**
      * The attributes that should be hidden for serialization.
